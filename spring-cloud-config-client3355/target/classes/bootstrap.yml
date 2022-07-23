@@ -1,0 +1,31 @@
+#这是系统级的yml文件，相比于application优先级更高，application文件的实现其实就是生成了一个自己的bootstrap文件
+#此时由于是分布式的，所以在客户端使用bootstrap
+server:
+  port: 3355
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: main   #配置文件名称
+      name: config  #分支名称
+      profile: dev   #读取后缀名称   即：读取的文件为config-dev
+      uri: http://localhost:3344   #配置中心地址
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
